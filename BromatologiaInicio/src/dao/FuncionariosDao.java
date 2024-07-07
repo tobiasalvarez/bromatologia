@@ -20,7 +20,7 @@ import model.Funcionarios;
 import telas.PagInicioLogin;
 //import telas.TelaLogin;
 //import telas.TelaPrincipal;
-import telas.TelaFuncionarios;
+import telas.CadastroSupermercados;
 
 public class FuncionariosDao implements DaoGenerica<Funcionarios>{
 

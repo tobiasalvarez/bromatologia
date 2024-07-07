@@ -50,7 +50,7 @@ public class PagInicioLogin extends javax.swing.JFrame {
             }
         });
 
-        btnSair.setText("Sair");
+        btnSair.setText("Salir");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
