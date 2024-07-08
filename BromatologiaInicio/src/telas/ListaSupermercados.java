@@ -1,5 +1,10 @@
 package telas;
 
+import dao.SupermercadoDao;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.Supermercado;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -16,8 +21,35 @@ public class ListaSupermercados extends javax.swing.JFrame {
      */
     public ListaSupermercados() {
         initComponents();
+        listar();
     }
+    
+    private void listar() {
+        DefaultTableModel model = (DefaultTableModel) tblFuncionarios.getModel();
+        model.setColumnCount(0);
+        model.addColumn("ID");
+        model.addColumn("CUIT/CUIL");
+        model.addColumn("Nombre");
+        model.addColumn("Telefono");
+        model.addColumn("Usuario");
+        model.addColumn("Tipo Usuario");
+        model.setRowCount(0); // Limpiar la tabla antes de cargar nuevos datos
 
+        SupermercadoDao dao = new SupermercadoDao();
+        ArrayList<Supermercado> supermercadosList = dao.dashboard();
+
+        for (Supermercado supermercado : supermercadosList) {
+            model.addRow(new Object[]{
+                supermercado.getID_Supermercado(),
+                supermercado.getCUIT_CUIL(),
+                supermercado.getNombre(),
+                supermercado.getTelefone(),
+                supermercado.getUsuario(),
+                supermercado.getTipo_User()
+            });
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,7 +61,7 @@ public class ListaSupermercados extends javax.swing.JFrame {
 
         lblTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblFuncionarios = new javax.swing.JTable();
         btnSair = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
 
@@ -38,7 +70,7 @@ public class ListaSupermercados extends javax.swing.JFrame {
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         lblTitulo.setText("Lista de Supermercados");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -49,7 +81,7 @@ public class ListaSupermercados extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblFuncionarios);
 
         btnSair.setText("Salir");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -104,10 +136,12 @@ public class ListaSupermercados extends javax.swing.JFrame {
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         // TODO add your handling code here:
+        listar();
     }//GEN-LAST:event_btnListarActionPerformed
 
     /**
@@ -149,7 +183,7 @@ public class ListaSupermercados extends javax.swing.JFrame {
     private javax.swing.JButton btnListar;
     private javax.swing.JButton btnSair;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTable tblFuncionarios;
     // End of variables declaration//GEN-END:variables
 }

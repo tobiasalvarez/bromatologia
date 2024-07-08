@@ -44,7 +44,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnAgregarUsuario" min="-2" pref="241" max="-2" attributes="0"/>
+                              <Component id="btnAgregarSupermercado" min="-2" pref="241" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="50" max="32767" attributes="0"/>
@@ -55,9 +55,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="btnGraficos" max="32767" attributes="0"/>
-                              <Component id="btnGraficos1" min="-2" pref="241" max="-2" attributes="0"/>
+                              <Component id="btnCerrarSesion" min="-2" pref="241" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnAgregarUsuario1" alignment="0" min="-2" pref="241" max="-2" attributes="0"/>
+                          <Component id="btnAgregarProducto" alignment="0" min="-2" pref="241" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -79,15 +79,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnProductos" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnAgregarUsuario" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAgregarSupermercado" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAgregarUsuario1" min="-2" max="-2" attributes="0"/>
+              <Component id="btnAgregarProducto" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnGraficos" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnGraficos1" min="-2" max="-2" attributes="0"/>
+              <Component id="btnCerrarSesion" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -131,7 +131,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProductosActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAgregarUsuario">
+    <Component class="javax.swing.JButton" name="btnAgregarSupermercado">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/agregar-usuario.png"/>
@@ -139,7 +139,7 @@
         <Property name="text" type="java.lang.String" value="Agregar Supermercado"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarUsuarioActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarSupermercadoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnGraficos">
@@ -153,7 +153,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficosActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnGraficos1">
+    <Component class="javax.swing.JButton" name="btnCerrarSesion">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/cerrar-sesion.png"/>
@@ -161,10 +161,10 @@
         <Property name="text" type="java.lang.String" value="Cerrar Sesion"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGraficos1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCerrarSesionActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAgregarUsuario1">
+    <Component class="javax.swing.JButton" name="btnAgregarProducto">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/agregar-producto (1).png"/>
@@ -172,7 +172,7 @@
         <Property name="text" type="java.lang.String" value="Agregar Producto en Venta"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarUsuario1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarProductoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

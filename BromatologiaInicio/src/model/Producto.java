@@ -13,6 +13,8 @@ public class Producto {
     private String NombreProducto;
     private String Supermercado;
     private int Cantidad;
+    private String Valor_Anterior;
+    private String Valor_Actual;       
     private String Vencimiento;
     
     public Producto(){
@@ -57,6 +59,22 @@ public class Producto {
 
     public void setVencimiento(String Vencimiento) {
         this.Vencimiento = Vencimiento;
+    }
+
+    public String getValor_Anterior() {
+        return Valor_Anterior;
+    }
+
+    public void setValor_Anterior(String Valor_Anterior) {
+        this.Valor_Anterior = Valor_Anterior;
+    }
+
+    public String getValor_Actual() {
+        return Valor_Actual;
+    }
+
+    public void setValor_Actual(String Valor_Actual) {
+        this.Valor_Actual = Valor_Actual;
     }
     
     

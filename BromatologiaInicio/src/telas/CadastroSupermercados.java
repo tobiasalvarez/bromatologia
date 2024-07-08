@@ -18,6 +18,7 @@ public class CadastroSupermercados extends javax.swing.JFrame {
      */
     public CadastroSupermercados() {
         initComponents();
+        listar();
     }
 
     /**
@@ -277,6 +278,7 @@ public class CadastroSupermercados extends javax.swing.JFrame {
 
         SupermercadoDao supermercadoDao = new SupermercadoDao();
         supermercadoDao.inserir(supermercado);
+        listar();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed

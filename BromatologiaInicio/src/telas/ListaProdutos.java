@@ -4,6 +4,11 @@
  */
 package telas;
 
+import dao.ProductoDao;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.Producto;
+
 /**
  *
  * @author Tobias
@@ -15,6 +20,34 @@ public class ListaProdutos extends javax.swing.JFrame {
      */
     public ListaProdutos() {
         initComponents();
+        listar();
+    }
+    private void listar() {
+        DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
+        model.setColumnCount(0);
+        model.addColumn("ID");
+        model.addColumn("Nombre Producto");
+        model.addColumn("Supermercado");
+        model.addColumn("Cantidad Disponible");
+        model.addColumn("Valor Anterior");
+        model.addColumn("Valor Actual");
+        model.addColumn("Vencimiento");
+        model.setRowCount(0); // Limpiar la tabla antes de cargar nuevos datos
+
+        ProductoDao dao = new ProductoDao();
+        ArrayList<Producto> productosList = dao.dashboard();
+
+        for (Producto producto : productosList) {
+            model.addRow(new Object[]{
+                producto.getID_Producto(),
+                producto.getNombreProducto(),
+                producto.getSupermercado(),
+                producto.getCantidad(),
+                producto.getValor_Anterior(),
+                producto.getValor_Actual(),
+                producto.getVencimiento()
+            });
+        }
     }
 
     /**
@@ -28,16 +61,16 @@ public class ListaProdutos extends javax.swing.JFrame {
 
         lblTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProdutos = new javax.swing.JTable();
+        tblProductos = new javax.swing.JTable();
         btnSair = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         lblTitulo.setText("Lista de Productos");
 
-        tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -48,7 +81,7 @@ public class ListaProdutos extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblProdutos);
+        jScrollPane1.setViewportView(tblProductos);
 
         btnSair.setText("Salir");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -98,14 +131,17 @@ public class ListaProdutos extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         // TODO add your handling code here:
+        listar();
     }//GEN-LAST:event_btnListarActionPerformed
 
     /**
@@ -148,6 +184,6 @@ public class ListaProdutos extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTable tblProdutos;
+    private javax.swing.JTable tblProductos;
     // End of variables declaration//GEN-END:variables
 }
