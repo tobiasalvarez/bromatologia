@@ -4,6 +4,14 @@
  */
 package telas;
 
+import dao.ProductoDao;
+import dao.SupermercadoDao;
+import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.Producto;
+import model.Supermercado;
+
 /**
  *
  * @author Tobias
@@ -15,6 +23,35 @@ public class CadastroProdutos extends javax.swing.JFrame {
      */
     public CadastroProdutos() {
         initComponents();
+        listar();
+    }
+    
+    private void listar() {
+        DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
+        model.setColumnCount(0);
+        model.addColumn("ID");
+        model.addColumn("Nombre Producto");
+        model.addColumn("Supermercado");
+        model.addColumn("Cantidad Disponible");
+        model.addColumn("Valor Anterior");
+        model.addColumn("Valor Actual");
+        model.addColumn("Vencimiento");
+        model.setRowCount(0); // Limpiar la tabla antes de cargar nuevos datos
+
+        ProductoDao dao = new ProductoDao();
+        ArrayList<Producto> productosList = dao.dashboard();
+
+        for (Producto producto : productosList) {
+            model.addRow(new Object[]{
+                producto.getID_Producto(),
+                producto.getNombreProducto(),
+                producto.getSupermercado(),
+                producto.getCantidad(),
+                producto.getValor_Anterior(),
+                producto.getValor_Actual(),
+                producto.getVencimiento()
+            });
+        }
     }
 
     /**
@@ -32,16 +69,20 @@ public class CadastroProdutos extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         lblNomeProduto = new javax.swing.JLabel();
         btnRemover = new javax.swing.JButton();
-        txtDataVencimento = new javax.swing.JTextField();
+        txtVencimiento = new javax.swing.JTextField();
         lblSupermercado = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
         lblCantidad = new javax.swing.JLabel();
         btnAdicionar = new javax.swing.JButton();
-        txtNomeProduto = new javax.swing.JTextField();
+        txtNombreProducto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblFuncionarios = new javax.swing.JTable();
+        tblProductos = new javax.swing.JTable();
+        txtValor_Actual = new javax.swing.JTextField();
+        txtValor_Anterior = new javax.swing.JTextField();
+        lblValor_Anterior = new javax.swing.JLabel();
+        lblValor_Actual = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,9 +116,9 @@ public class CadastroProdutos extends javax.swing.JFrame {
             }
         });
 
-        txtDataVencimento.addActionListener(new java.awt.event.ActionListener() {
+        txtVencimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataVencimentoActionPerformed(evt);
+                txtVencimientoActionPerformed(evt);
             }
         });
 
@@ -98,7 +139,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
         });
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        lblTitulo.setText("Registro de Supermercados");
+        lblTitulo.setText("Registro de Productos");
 
         lblCantidad.setText("Cantidad Disponible:");
 
@@ -109,13 +150,13 @@ public class CadastroProdutos extends javax.swing.JFrame {
             }
         });
 
-        txtNomeProduto.addActionListener(new java.awt.event.ActionListener() {
+        txtNombreProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeProdutoActionPerformed(evt);
+                txtNombreProductoActionPerformed(evt);
             }
         });
 
-        tblFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -123,7 +164,23 @@ public class CadastroProdutos extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblFuncionarios);
+        jScrollPane1.setViewportView(tblProductos);
+
+        txtValor_Actual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValor_ActualActionPerformed(evt);
+            }
+        });
+
+        txtValor_Anterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValor_AnteriorActionPerformed(evt);
+            }
+        });
+
+        lblValor_Anterior.setText("Valor anterior:");
+
+        lblValor_Actual.setText("Valor Actual:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,7 +193,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblNomeProduto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblSupermercado)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -148,42 +205,47 @@ public class CadastroProdutos extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblDataVencimento)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtDataVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnListar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(89, 89, 89)
+                        .addComponent(btnAdicionar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblValor_Anterior)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(txtValor_Anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblValor_Actual)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtValor_Actual, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(125, 125, 125))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(292, 292, 292)
                 .addComponent(lblTitulo)
-                .addGap(149, 149, 149))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAdicionar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRemover)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSair)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnListar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNomeProduto)
-                            .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSupermercado)
@@ -191,11 +253,25 @@ public class CadastroProdutos extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCantidad)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblValor_Anterior)
+                            .addComponent(txtValor_Anterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDataVencimento)
-                            .addComponent(txtDataVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblValor_Actual)
+                            .addComponent(txtValor_Actual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDataVencimento)
+                    .addComponent(txtVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdicionar)
+                    .addComponent(btnEditar)
+                    .addComponent(btnRemover)
+                    .addComponent(btnSair)
+                    .addComponent(btnListar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -221,49 +297,58 @@ public class CadastroProdutos extends javax.swing.JFrame {
 
         /*Funcionarios funcionario = new Funcionarios();
         funcionario.setID_funcionario(Integer.parseInt(txtID.getText()));*/
-        FuncionariosDao funcionariosDao = new FuncionariosDao();
-        funcionariosDao.excluirID(Integer.parseInt(txtID.getText()));
+        int selectedRow = tblProductos.getSelectedRow();
+        int id = (int) tblProductos.getValueAt(selectedRow, 0);
+        ProductoDao productoDao = new ProductoDao();
+        productoDao.excluirID(id);
+        listar();
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void txtDataVencimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataVencimentoActionPerformed
+    private void txtVencimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVencimientoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataVencimentoActionPerformed
+    }//GEN-LAST:event_txtVencimientoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-        txtID.setText("");
-        txtCUIT.setText("");
-        txtNomeProduto.setText("");
+        txtNombreProducto.setText("");
+        txtNombreProducto.setText("");
         txtSupermercado.setText("");
         txtCantidad.setText("");
-        txtDataVencimento.setText("");
-        txtGenero.setText("");
-        txtTipoUser.setText("");
+        txtVencimiento.setText("");
+        txtValor_Anterior.setText("");
+        txtValor_Actual.setText("");
         listar();
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
-        Funcionarios funcionario =  new Funcionarios();
-        funcionario.setID_funcionario(Integer.parseInt(txtID.getText()));
-        funcionario.setCPF(txtCUIT.getText());
-        funcionario.setNome(txtNomeProduto.getText());
-        funcionario.setTelefone(txtSupermercado.getText());
-        funcionario.setUsuario(txtCantidad.getText());
-        funcionario.setSenha(txtDataVencimento.getText());
-        funcionario.setFK1_Sexo(txtGenero.getText());
-        funcionario.setTipo_User(Integer.parseInt(txtTipoUser.getText()));
+        Producto producto =  new Producto();
+        producto.setNombreProducto(txtNombreProducto.getText());
+        producto.setSupermercado(txtSupermercado.getText());
+        producto.setCantidad(parseInt(txtCantidad.getText()));
+        producto.setValor_Anterior(txtValor_Anterior.getText());
+        producto.setValor_Actual(txtValor_Actual.getText());
+        producto.setVencimiento(txtVencimiento.getText());
 
-        FuncionariosDao funcionariosDao = new FuncionariosDao();
-        funcionariosDao.inserir(funcionario);
+        ProductoDao productoDao = new ProductoDao();
+        productoDao.inserir(producto);
+        listar();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
-    private void txtNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeProdutoActionPerformed
+    private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeProdutoActionPerformed
+    }//GEN-LAST:event_txtNombreProductoActionPerformed
+
+    private void txtValor_ActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValor_ActualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValor_ActualActionPerformed
+
+    private void txtValor_AnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValor_AnteriorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValor_AnteriorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,10 +397,14 @@ public class CadastroProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel lblNomeProduto;
     private javax.swing.JLabel lblSupermercado;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTable tblFuncionarios;
+    private javax.swing.JLabel lblValor_Actual;
+    private javax.swing.JLabel lblValor_Anterior;
+    private javax.swing.JTable tblProductos;
     private javax.swing.JTextField txtCantidad;
-    private javax.swing.JTextField txtDataVencimento;
-    private javax.swing.JTextField txtNomeProduto;
+    private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtSupermercado;
+    private javax.swing.JTextField txtValor_Actual;
+    private javax.swing.JTextField txtValor_Anterior;
+    private javax.swing.JTextField txtVencimiento;
     // End of variables declaration//GEN-END:variables
 }

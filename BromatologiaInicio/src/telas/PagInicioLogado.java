@@ -31,10 +31,10 @@ public class PagInicioLogado extends javax.swing.JFrame {
         btnListaSuper = new javax.swing.JButton();
         lblImagenMunicipalidad = new javax.swing.JLabel();
         btnProductos = new javax.swing.JButton();
-        btnAgregarUsuario = new javax.swing.JButton();
+        btnAgregarSupermercado = new javax.swing.JButton();
         btnGraficos = new javax.swing.JButton();
-        btnGraficos1 = new javax.swing.JButton();
-        btnAgregarUsuario1 = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
+        btnAgregarProducto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -60,11 +60,11 @@ public class PagInicioLogado extends javax.swing.JFrame {
             }
         });
 
-        btnAgregarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-usuario.png"))); // NOI18N
-        btnAgregarUsuario.setText("Agregar Supermercado");
-        btnAgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarSupermercado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-usuario.png"))); // NOI18N
+        btnAgregarSupermercado.setText("Agregar Supermercado");
+        btnAgregarSupermercado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarUsuarioActionPerformed(evt);
+                btnAgregarSupermercadoActionPerformed(evt);
             }
         });
 
@@ -76,19 +76,19 @@ public class PagInicioLogado extends javax.swing.JFrame {
             }
         });
 
-        btnGraficos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cerrar-sesion.png"))); // NOI18N
-        btnGraficos1.setText("Cerrar Sesion");
-        btnGraficos1.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cerrar-sesion.png"))); // NOI18N
+        btnCerrarSesion.setText("Cerrar Sesion");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGraficos1ActionPerformed(evt);
+                btnCerrarSesionActionPerformed(evt);
             }
         });
 
-        btnAgregarUsuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-producto (1).png"))); // NOI18N
-        btnAgregarUsuario1.setText("Agregar Producto en Venta");
-        btnAgregarUsuario1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-producto (1).png"))); // NOI18N
+        btnAgregarProducto.setText("Agregar Producto en Venta");
+        btnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarUsuario1ActionPerformed(evt);
+                btnAgregarProductoActionPerformed(evt);
             }
         });
 
@@ -111,7 +111,7 @@ public class PagInicioLogado extends javax.swing.JFrame {
                                 .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(btnAgregarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnAgregarSupermercado, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                         .addComponent(lblImagenMunicipalidad))
                     .addGroup(layout.createSequentialGroup()
@@ -119,8 +119,8 @@ public class PagInicioLogado extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(btnGraficos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnGraficos1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnAgregarUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -137,13 +137,13 @@ public class PagInicioLogado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnProductos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAgregarUsuario)))
+                        .addComponent(btnAgregarSupermercado)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAgregarUsuario1)
+                .addComponent(btnAgregarProducto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGraficos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGraficos1)
+                .addComponent(btnCerrarSesion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -153,27 +153,35 @@ public class PagInicioLogado extends javax.swing.JFrame {
 
     private void btnListaSuperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaSuperActionPerformed
         // TODO add your handling code here:
+        ListaSupermercados listaSupermercados = new ListaSupermercados();
+        listaSupermercados.setVisible(true);
     }//GEN-LAST:event_btnListaSuperActionPerformed
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
         // TODO add your handling code here:
+        ListaProdutos listaProdutos =  new ListaProdutos();
+        listaProdutos.setVisible(true);
     }//GEN-LAST:event_btnProductosActionPerformed
 
-    private void btnAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuarioActionPerformed
+    private void btnAgregarSupermercadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarSupermercadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarUsuarioActionPerformed
+        CadastroSupermercados cadastroSupermercados = new CadastroSupermercados();
+        cadastroSupermercados.setVisible(true);
+    }//GEN-LAST:event_btnAgregarSupermercadoActionPerformed
 
     private void btnGraficosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGraficosActionPerformed
 
-    private void btnGraficos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficos1ActionPerformed
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_btnGraficos1ActionPerformed
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
-    private void btnAgregarUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuario1ActionPerformed
+    private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarUsuario1ActionPerformed
+        CadastroProdutos cadastroProdutos = new CadastroProdutos();
+        cadastroProdutos.setVisible(true);
+    }//GEN-LAST:event_btnAgregarProductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,10 +220,10 @@ public class PagInicioLogado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregarUsuario;
-    private javax.swing.JButton btnAgregarUsuario1;
+    private javax.swing.JButton btnAgregarProducto;
+    private javax.swing.JButton btnAgregarSupermercado;
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnGraficos;
-    private javax.swing.JButton btnGraficos1;
     private javax.swing.JButton btnListaSuper;
     private javax.swing.JButton btnProductos;
     private javax.swing.JLabel lblImagenMunicipalidad;
