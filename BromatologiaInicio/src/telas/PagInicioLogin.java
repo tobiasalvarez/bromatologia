@@ -3,6 +3,7 @@ package telas;
 import dao.ConsultasDao;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -39,6 +40,7 @@ public class PagInicioLogin extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
         pswSenha = new javax.swing.JPasswordField();
+        btnRegistrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -68,6 +70,13 @@ public class PagInicioLogin extends javax.swing.JFrame {
             }
         });
 
+        btnRegistrarse.setText("Registrarse");
+        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,15 +89,21 @@ public class PagInicioLogin extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblImagenUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblImagenSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnEntrar)
+                        .addGap(18, 18, 18)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtUsuario)
-                            .addComponent(pswSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))
+                            .addComponent(pswSenha))
+                        .addGap(12, 12, 12))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12))
+                        .addComponent(btnRegistrarse)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSair)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,8 +123,9 @@ public class PagInicioLogin extends javax.swing.JFrame {
                             .addComponent(pswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnEntrar)
+                            .addComponent(btnSair)
+                            .addComponent(btnRegistrarse))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -132,6 +148,27 @@ public class PagInicioLogin extends javax.swing.JFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
+        // TODO add your handling code here:
+        String mensaje = "¿Que tipo de usuario desea registrar?";
+        Object[] opcion = {"Comprador","Supermercado"};
+        int respuesta = JOptionPane.showOptionDialog(null,mensaje,"Registro de Usuario",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,
+        null, 
+        opcion, 
+        opcion[0]);
+        if(respuesta == JOptionPane.YES_OPTION){
+            System.out.println("Registro de Comprador seleccionado.");
+            CadastroUsuario cadastroUsuario = new CadastroUsuario();
+            cadastroUsuario.setVisible(true);
+            this.dispose();
+        }else if(respuesta == JOptionPane.NO_OPTION){
+            System.out.println("Registro de Supermercado seleccionado.");
+            CadastroSupermercados cadastrosupermercados = new CadastroSupermercados();
+            cadastrosupermercados.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +207,7 @@ public class PagInicioLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnRegistrarse;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel lblImagenMunicipalidad;
     private javax.swing.JLabel lblImagenSenha;
