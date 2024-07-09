@@ -1,5 +1,9 @@
 package telas;
 
+import dao.ConsultasDao;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -17,7 +21,8 @@ public class PagInicioLogin extends javax.swing.JFrame {
     public PagInicioLogin() {
         initComponents();
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,6 +119,10 @@ public class PagInicioLogin extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
+        String Usuario = txtUsuario.getText();
+        String Senha = String.valueOf(pswSenha.getPassword());
+        ConsultasDao consultasDao = new ConsultasDao();
+        consultasDao.ConsultarUsuario(Usuario,Senha,this);
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void pswSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswSenhaActionPerformed
